@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+        	*{margin:0;padding:0;}
+        	li{
+        		list-style:none;
+        	}
+        	.box{
+        		width:300px;
+        		height:300px;
+        		margin:100px auto;
+        		transform-style: preserve-3d;
+        		transform:rotateX(-10deg) rotateY(-20deg);
+        		position:relative;
+        		animation: dcdc 5s linear 3s infinite alternate;
+        	}
+        	.box>div{
+        		width:100%;
+        		height:100%;
+        		position:absolute;
+        		opacity:0.5;
+        	}
+        	.box .up{
+        	/* 	background-color:pink; */
+        		transform:translateY(-150px) rotateX(90deg);
+        	}
+        	.box .down{
+        	/* 	background-color:deeppink; */
+        		transform:translateY(150px) rotateX(-90deg);
+        	}
+        	.box .left{
+        	/* 	background-color:yellow; */
+        		transform:translateX(-150px) rotateY(-90deg);
+        	}
+        	.box .right{
+        	/* 	background-color:yellowgreen; */
+        		transform: translateX(150px) rotateY(90deg);
+        	}
+        	.box .hou{
+        	/* 	background-color:blue; */
+        		transform: translateZ(-150px);
+        	}
+			.box .qian{
+				/* background-color:skyblue; */
+				transform:translateZ(150px);
+			}
+			.box li{
+				width:100px;
+				height:100px;
+				border:1px solid #fff;
+				float:left;
+				box-sizing: border-box;
+				background-color:red;
+				position:relative;
+			}
+			@keyframes dcdc{
+				0%{
+                    transform: rotateX(-11deg) rotateY(-22deg);
+                }
+                10%{
+                    transform: rotateX(-30deg) rotateY(-40deg);
+                }
+                20%{
+                    transform: rotateX(-50deg) rotateY(-60deg);
+                }
+                30%{
+                    transform: rotateX(-100deg) rotateY(-100deg);
+                }
+                40%{
+                    transform: rotateX(-130deg) rotateY(-140deg);
+                }
+                50%{
+                    transform: rotateX(-160deg) rotateY(-160deg);
+                }
+               	60%{
+                    transform: rotateX(-180deg) rotateY(-190deg);
+                }
+                70%{
+                    transform: rotateX(-160deg) rotateY(-160deg);
+                }
+                80%{
+                    transform: rotateX(-130deg) rotateY(-140deg);
+                }
+                90%{
+                    transform: rotateX(-100deg) rotateY(-100deg);
+                }
+                100%{
+                    transform: rotateX(-50deg) rotateY(-60deg);
+                }
+			}
+        </style>
+    </head>
+    <body>
+    	<div class="box">
+    		<div class="up"></div>
+    		<div class="down"></div>
+    		<div class="left"></div>
+    		<div class="right"></div>
+    		<div class="hou"></div>
+    		<div class="qian"></div>
+    	</div>
+    	<script src="jquery.js"></script>
+    	<script>
+    		var box = $(".box");
+    		var divs = box.children();
+    		divs.each(function(index,ele){
+    			//创建UL
+    			var ul = $("<ul></ul>");
+    			for(var i=0;i<9;i++){
+    				var li = $("<li></li>");
+    				var colorarr=["pink","deepink","yellow","yellowgreen","blue","skyblue"];
+    				li.css("backgroundColor",colorarr[index]);
+    				ul.append(li);
+    			}
+    			$(ele).append(ul);
+    		})
+    		//随机定位小的盒子
+    		var arrpostion=[];
+    		for(var i=0;i<54;i++){
+    			arrpostion.push(parseInt(Math.random()*300));
+    		}
+    		console.log(arrpostion);
+    		$("li").each(function(index,ele){
+    			$(ele).css({"top":arrpostion[index],"left":arrpostion[index]});
+    			$(ele).animate({"top":0,"left":0},3000);
+    		})
+    	</script>
+    </body>
+</html>
